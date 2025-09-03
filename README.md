@@ -1,4 +1,4 @@
-# XBaseConverter
+# BaseConverter
 
 A web-based application that converts numbers between Binary, Decimal, Octal, and Hexadecimal systems. Built using Angular for the frontend and Node.js with Express for the backend. It also includes a detailed step-by-step explanation and history logging feature.
 
@@ -50,12 +50,16 @@ A web-based application that converts numbers between Binary, Decimal, Octal, an
 
 ```bash
 Install dependencies:
-npm install
 cd Number_system
+npm install
 ng serve
+
 ```
 
 ### 📦 Backend Setup
+install node.js
+node backend/server.js
+
 
 ```bash
 cd Number_system
