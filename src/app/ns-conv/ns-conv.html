@@ -1,0 +1,121 @@
+<!-- ns-conv.html -->
+<div class="container">
+  <div class="header">
+    <h1>Number Base Converter</h1>
+    <div class="theme-toggle" (click)="toggleTheme()">🌙/☀️</div>
+  </div>
+
+  <div class="main-content">
+    <div class="input-panel">
+      <div class="input-group">
+        <label for="inputNumber">Enter Number:</label>
+        <input
+          type="text"
+          id="inputNumber"
+          [(ngModel)]="currentNumber"
+          placeholder="Enter a number..."
+          title="Enter any valid number for the selected base" />
+      </div>
+
+      <div class="input-group">
+        <label for="fromBase">From Base:</label>
+        <select id="fromBase" [(ngModel)]="fromBase" title="Select the current base of your number">
+          <option value="10">Decimal (10)</option>
+          <option value="2">Binary (2)</option>
+          <option value="8">Octal (8)</option>
+          <option value="16">Hexadecimal (16)</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="toBase">To Base:</label>
+        <select id="toBase" [(ngModel)]="toBase" title="Select the target base for conversion">
+          <option value="2">Binary (2)</option>
+          <option value="8">Octal (8)</option>
+          <option value="10">Decimal (10)</option>
+          <option value="16">Hexadecimal (16)</option>
+        </select>
+      </div>
+
+      <button class="convert-btn" (click)="startConversion()">
+        🚀 Start Conversion
+      </button>
+
+      <div class="history-panel">
+        <h3>📚 Conversion History</h3>
+        <div class="history-container">
+          <div *ngIf="history.length === 0" class="history-empty">
+            <p>No conversions yet. Start converting to see your history!</p>
+          </div>
+          <div *ngFor="let item of history; let i = index" class="history-item" (click)="loadFromHistory(item)">
+            <div class="history-conversion">
+              <span class="history-from">{{ item.from }} (base {{ item.fromBase }})</span>
+              <span class="history-arrow">→</span>
+              <span class="history-to">{{ item.to }} (base {{ item.toBase }})</span>
+            </div>
+            <div class="history-time">{{ item.timestamp | date:'MMM d, y h:mm a' }}</div>
+            <button class="history-delete" (click)="deleteHistoryItem(i); $event.stopPropagation()">×</button>
+          </div>
+        </div>
+        <button class="control-btn" (click)="clearHistory()" *ngIf="history.length > 0">
+          🗑️ Clear History
+        </button>
+      </div>
+    </div>
+
+    <div class="visual-panel">
+      <div class="animation-container" id="animationContainer">
+        <div class="step-display">
+          <div class="step-title" [@fadeIn]>{{ currentStepTitle }}</div>
+          <div [innerHTML]="currentStepVisual" [@slideInUp]></div>
+          <div class="operation-display fade-in" *ngIf="currentStepContent">
+            <strong>Step:</strong> {{ currentStepContent }}
+          </div>
+          <div class="operation-display fade-in" *ngIf="currentStepExplanation" style="border-left-color: var(--highlight-green);">
+            <strong>Explanation:</strong> {{ currentStepExplanation }}
+          </div>
+          <div *ngIf="!conversionSteps.length" style="text-align: center; color: var(--text-secondary)">
+            <p>Enter a number and select the bases to see the magic happen!</p>
+            <p>Watch each step unfold with beautiful animations.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="control-btn" (click)="previousStep()" [disabled]="currentStep <= 0">
+          ⬅️ Previous
+        </button>
+        <!-- <button class="control-btn" [ngClass]="{'active': isAutoPlaying}" (click)="toggleAutoPlay()">
+          {{ isAutoPlaying ? '⏸️ Pause' : '▶️ Auto Play' }}
+        </button> -->
+        <button class="control-btn" (click)="nextStep()" [disabled]="currentStep >= conversionSteps.length - 1">
+          Next ➡️
+        </button>
+        <button class="control-btn" (click)="restartAnimation()">
+          🔄 Restart
+        </button>
+        <button class="control-btn" (click)="skipToEnd()">
+          ⏭️ Skip to End
+        </button>
+        <button class="control-btn" (click)="exportSteps()" *ngIf="conversionSteps.length > 0">
+          💾 Export Steps
+        </button>
+      </div>
+
+      <div class="progress-timeline">
+        <h3>Conversion Progress</h3>
+        <div class="timeline">
+          <div class="timeline-line"></div>
+          <div class="timeline-progress" [style.width.%]="timelineProgress"></div>
+          <div *ngFor="let step of conversionSteps; let i = index"
+               class="timeline-node"
+               [ngClass]="{ 'completed': i < currentStep, 'current': i === currentStep }"
+               (click)="goToStep(i)">
+            {{ i + 1 }}
+            <div class="tooltip">{{ step.title }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
