@@ -1,0 +1,51 @@
+[
+  {
+    "number": "5",
+    "fromBase": "10",
+    "toBase": "2",
+    "result": "101",
+    "timestamp": "2025-07-24T05:56:45.707Z"
+  },
+  {
+    "number": "AA15",
+    "fromBase": "16",
+    "toBase": "10",
+    "result": "43541",
+    "timestamp": "2025-07-24T05:58:08.800Z"
+  },
+  {
+    "number": "01",
+    "fromBase": "10",
+    "toBase": "8",
+    "result": "1",
+    "timestamp": "2025-07-24T09:15:59.702Z"
+  },
+  {
+    "number": "42",
+    "fromBase": "10",
+    "toBase": "2",
+    "result": "101010",
+    "timestamp": "2025-07-24T09:33:40.906Z"
+  },
+  {
+    "number": "42",
+    "fromBase": "10",
+    "toBase": "2",
+    "result": "101010",
+    "timestamp": "2025-07-24T09:41:31.963Z"
+  },
+  {
+    "number": "01",
+    "fromBase": "10",
+    "toBase": "2",
+    "result": "1",
+    "timestamp": "2025-07-24T09:42:02.722Z"
+  },
+  {
+    "number": "01",
+    "fromBase": "2",
+    "toBase": "8",
+    "result": "1",
+    "timestamp": "2025-07-24T09:42:10.283Z"
+  }
+]
